@@ -6,6 +6,7 @@
 #trap 'exec 2>&4 1>&3' 0 1 2 3
 #exec 1>log.out 2>&1
 
+
 { # the entire script stdout and error will be displayed and redirected to log.txt
 #reading variables
 source ./scripts/simple_variables.sh
@@ -80,12 +81,16 @@ else
 	echo "$(tput setaf 1)something went wrong $(tput setaf 7)"
 fi
 
+#extracting fastq folder containg fastq files
+tar -xf fastq.tar.gz
 
 #mapping w/ BWA
 programs/bwa-0.7.12/bwa mem -t 2 -M $fa ${mut_files[*]} > output/$mut.sam &
 programs/bwa-0.7.12/bwa mem -t 2 -M $fa ${wt_files[*]} > output/$wt.sam
 wait
 
+#removing the fatsq folder
+rm -r fastq
 
 #due to old samtools version this step is probably necessary
 programs/samtools-1.5/samtools view -bSh output/$mut.sam > output/$mut.bam &
