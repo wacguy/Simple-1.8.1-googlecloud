@@ -81,6 +81,7 @@ else
 	echo "$(tput setaf 1)something went wrong $(tput setaf 7)"
 fi
 
+
 #extracting fastq folder containg fastq files
 tar -xf fastq.tar.gz
 
