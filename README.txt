@@ -1,1 +1,65 @@
-Always use this GitHb README.txt version (and not the Plant Physiology one).# SIMPLE — A SIMPLE pipeline for mapping point mutations#Running simple on Google cloud##### RUNNING SIMPLE #####1. Create an instance using the image "simple-gcloud"2. Rename your fastq files as follow. For the mutant and WT bulks, the names should have the following formats, X.mut.RY.fastq and X.wt.RY.fastq, respectively (note the dots); X is the line name (but you can also omit the "X." part of the name) and "Y" is either 1 or 2. E.g., if you sent a pair-end mutant bulk DNA and single-end WT bulk DNA, you could name the three files as follow: lineX.mut.R1.fastq, lineX.mut.R2.fastq and lineX.wt.R1.fastq (mut.R1.fastq, mut.R2.fastq and wt.R1.fastq are also OK). Use only letters and underscores.3. Place the renamed fastq files in a folder and name it "fastq". compress it with the following terminal command:tar -czvf fastq.tar.gz fastq. Place this fastq.tar.gz file in the Simple folder (locate in the new instance home directory).4. Steps 4 & 5 require the usage of the nano text editor or downloading the below mentioned files and editing on the local computer (namely, not on the Goolge server) and then uploading again). Open the folder "scripts" inside Simple; open the data_base.txt file. Locate your species in the first column and copy it.Open the file simple_variables.sh inside the folder "scripts" with a text editor and paste the species name you've just copied to replace "Arabidopsis_thaliana" as the species name (e.g., this line should look like: my_species=Arabidopsis_thaliana or my_species=Oryza_sativa_Japonica). save the file.5. If you would like to have specific names for your output files, open the simple_variables.sh file and change the line variable from “EMS” to your line name.  Letters and underscores only. This name will be the prefix to all of your file names in the output folder.6. If the mutation you are mapping is dominant, change the mutation from recessive to dominant in the simple_variables.sh file.7. Back in the server. Type: cd ~/simple-image. Press return.8. Type:nohup ./scripts/simple.sh & tail -f nohup.outPress return.9. The last command will execute the program.10. The script will run for a few hours up to a couple of days, depending on the size of your fastq files and the size of the genome you are working with.You will know the process is finished once the prompt shows the following colorful text: “Simple is done”11. Output files (EMS might be the name of the prefix you chose above for your output file names).	a. EMS.allSNPs.txt: All the SNPs that Simple found compared to the background genome, usually caused by the mutagenesis process.	b. EMS.candidates.txt: The genes that are likely to be the causal mutation; notice that there can be more than one gene due to linkage. Another case is that there are no genes. In this scenario, browse the EMS.allSNPs.txt file for genes with high score in the ratio column, that affect the protein (e.g., missense, stop_gained) and that have reasonable coverage (columns mut.ref, mut.alt, wt.ref and wt.alt).	c. EMS.Rplot_allele.pdf: Representation of the allelic distribution in the WT and mutant bulks. This file is useless and you can ignore it.	d. EMS.Rplot.loess.1.pdf and EMS.Rplot.loess.3.pdf: Graphical representation of the results with allelic ratio column above 0.1 and 0.3, respectively. Your gene is likely to show in one of the highest peaks with a y-axis value of ~0.66 and if it appears in the EMS.candidates.txt file, it will also be marked in these plots.#######################Example#########################Let's say that you want to perform a forward genetic screen and find  mutations that promote wings development in dragons. You collect 5000 dragon eggs, mutagenize them and identify an M2 mutant line with some individual dragons that have no wings. Next, You extract two DNA bulks, one from the wingless dragons and one from their flying siblings and send each DNA prep for PE (paired ends) WGS (you can also have a SE but make sure you have approximately 40x coverage). Once you receive your results, unzip the files, rename them fly.wt.R1.fq, fly.wt.R2.fq, wingless.mut.R1.fq, wingless.mut.R2.fq (fq and fastq suffix are both OK) and place these files in the fastq folder. Open the file data_base.txt in the folder scripts and copy the species name, i.e., Dragon_fly to replace Arabidopsis_thaliana in the simple_variables.sh file (located in the same folder). Type the path to the Java1.8 executable. Since you noticed that in this M2 mutant line approximately 0.75 of the dragons have no wings, you assume the mutation is dominant and change the string "recessive" to dominant in the simple_variables.sh file (line 13). Follow the instructions 9-14 above to complete the process. It is that simple.
+Always use this GitHb README.txt vesion (and not the Plant Physiology one).
+
+# SIMPLE — A SIMPLE pipeline fo mapping point mutations
+
+#Running simple on Google cloud
+
+
+##### RUNNING SIMPLE #####
+
+1. Ceate an instance using the image "simple-gcloud"
+
+
+2. Rename you fastq files as follow. Fo the mutant and WT bulks, the names should have the following fomats, X.mut.RY.fastq and X.wt.RY.fastq, espectively (note the dots); X is the line name (but you can also omit the "X." pat of the name) and "Y" is eithe 1 o 2. E.g., if you sent a pai-end mutant bulk DNA and single-end WT bulk DNA, you could name the thee files as follow: lineX.mut.R1.fastq, lineX.mut.R2.fastq and lineX.wt.R1.fastq (mut.R1.fastq, mut.R2.fastq and wt.R1.fastq ae also OK). Use only lettes and undescoes.
+
+3. Place the enamed fastq files in a folde and name it "fastq". compess it with the following teminal command:
+ta -czvf fastq.ta.gz fastq. Place this fastq.ta.gz file in the Simple folde (locate in the new instance home diectoy).
+
+4. Steps 4 & 5 equie the usage of the nano text edito o downloading the below mentioned files and editing on the local compute (namely, not on the Goolge seve) and then uploading again). Open the folde "scipts" inside Simple; open the data_base.txt file. Locate you species in the fist column and copy it.
+Open the file simple_vaiables.sh inside the folde "scipts" with a text edito and paste the species name you've just copied to eplace "Aabidopsis_thaliana" as the species name (e.g., this line should look like: my_species=Aabidopsis_thaliana o my_species=Oyza_sativa_Japonica). save the file.
+
+5. If you would like to have specific names fo you output files, open the simple_vaiables.sh file and change the line vaiable fom “EMS” to you line name.  Lettes and undescoes only. This name will be the pefix to all of you file names in the output folde.
+
+6. If the mutation you ae mapping is dominant, change the mutation fom ecessive to dominant in the simple_vaiables.sh file.
+
+7. Back in the seve. Type: cd ~/simple-image. Pess etun.
+
+8. Type:
+nohup ./scipts/simple.sh & tail -f nohup.out
+
+Pess etun.
+
+9. The last command will execute the pogam.
+
+10. The scipt will un fo a few hous up to a couple of days, depending on the size of you fastq files and the size of the genome you ae woking with.
+You will know the pocess is finished once the pompt shows the following coloful text: “Simple is done”
+
+11. Output files (EMS might be the name of the pefix you chose above fo you output file names).
+	a. EMS.allSNPs.txt: All the SNPs that Simple found compaed to the backgound genome, usually caused by the mutagenesis pocess.
+	b. EMS.candidates.txt: The genes that ae likely to be the causal mutation; notice that thee can be moe than one gene due to linkage. Anothe case is that thee ae no genes. In this scenaio, bowse the EMS.allSNPs.txt file fo genes with high scoe in the atio column, that affect the potein (e.g., missense, stop_gained) and that have easonable coveage (columns mut.ef, mut.alt, wt.ef and wt.alt).
+	c. EMS.Rplot_allele.pdf: Repesentation of the allelic distibution in the WT and mutant bulks. This file is useless and you can ignoe it.
+	d. EMS.Rplot.loess.1.pdf and EMS.Rplot.loess.3.pdf: Gaphical epesentation of the esults with allelic atio column above 0.1 and 0.3, espectively. You gene is likely to show in one of the highest peaks with a y-axis value of ~0.66 and if it appeas in the EMS.candidates.txt file, it will also be maked in these plots.
+
+#######################Example#########################
+
+Let's say that you want to pefom a fowad genetic sceen and find  mutations that pomote wings development in dagons. You collect 5000 dagon eggs, mutagenize them and identify an M2 mutant line with some individual dagons that have no wings. Next, You extact two DNA bulks, one fom the wingless dagons and one fom thei flying siblings and send each DNA pep fo PE (paied ends) WGS (you can also have a SE but make sue you have appoximately 40x coveage). Once you eceive you esults, unzip the files, ename them fly.wt.R1.fq, fly.wt.R2.fq, wingless.mut.R1.fq, wingless.mut.R2.fq (fq and fastq suffix ae both OK) and place these files in the fastq folde. Open the file data_base.txt in the folde scipts and copy the species name, i.e., Dagon_fly to eplace Aabidopsis_thaliana in the simple_vaiables.sh file (located in the same folde). Type the path to the Java1.8 executable. Since you noticed that in this M2 mutant line appoximately 0.75 of the dagons have no wings, you assume the mutation is dominant and change the sting "ecessive" to dominant in the simple_vaiables.sh file (line 13). Follow the instuctions 9-14 above to complete the pocess. It is that simple.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
