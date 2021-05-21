@@ -13,7 +13,7 @@ Always use this GitHb README.txt version (and not the Plant Physiology one).
 2. Rename you fastq files as follow. For the mutant and WT bulks, the names should have the following formats, X.mut.RY.fastq and X.wt.RY.fastq, respectively (note the dots); X is the line name (but you can also omit the "X." part of the name) and "Y" is eithe 1 o 2. E.g., if you sent a paired-end mutant bulk DNA and single-end WT bulk DNA, you could name the three files as follow: lineX.mut.R1.fastq, lineX.mut.R2.fastq and lineX.wt.R1.fastq (mut.R1.fastq, mut.R2.fastq and wt.R1.fastq are also OK). Use only letters and undescoes.
 
 3. Place the renamed fastq files in a folder and name it "fastq". compess it with the following teminal command:
-tar -czvf fastq.ta.gz fastq. Place this fastq.ta.gz file in the Simple folder (locate in the new instance home diectoy).
+tar -czvf fastq.ta.gz fastq. Place this fastq.ta.gz file in the Simple folder (located in the new instance home diectoy).
 
 4. Steps 4 & 5 require the usage of the nano text editor or downloading the below mentioned files and editing on the local computer (namely, not on the Goolge server) and then uploading again. Open the folder "scripts" inside Simple; open the data_base.txt file. Locate your species in the first column and copy it.
 Open the file simple_vaiables.sh inside the folder "scipts" with a text editor and paste the species name you've just copied to replace "Aabidopsis_thaliana" as the species name (e.g., this line should look like: my_species=Aabidopsis_thaliana or my_species=Oyza_sativa_Japonica). save the file.
