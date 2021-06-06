@@ -15,7 +15,7 @@ Always use this GitHb README.txt version (and not the Plant Physiology one).
 3. Place the renamed fastq files in a folder and name it "fastq". compess it with the following teminal command:
 tar -czvf fastq.ta.gz fastq. Place this fastq.ta.gz file in the Simple folder (located in the new instance home diectoy).
 
-4. Steps 4 & 5 require the usage of the nano text editor or downloading the below mentioned files and editing on the local computer (namely, not on the Goolge server) and then uploading again. Open the folder "scripts" inside Simple; open the data_base.txt file. Locate your species in the first column and copy it.
+4. Steps 4 & 5 require the usage of the nano text editor or downloading the below mentioned files and edit on a local computer (namely, not on the Goolge server) and then uploading again. Open the folder "scripts" inside Simple; open the data_base.txt file. Locate your species in the first column and copy it.
 Open the file simple_vaiables.sh inside the folder "scipts" with a text editor and paste the species name you've just copied to replace "Aabidopsis_thaliana" as the species name (e.g., this line should look like: my_species=Aabidopsis_thaliana or my_species=Oyza_sativa_Japonica). save the file.
 
 5. If you would like to have specific names for your output files, open the simple_vaiables.sh file and change the line vaiable fom “EMS” to your line name.  Lettes and underscores only. This name will be the pefix to all of your file names in the output folder.
